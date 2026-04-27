@@ -307,3 +307,32 @@ h3 {
     grid-template-columns: 1fr;
   }
 }
+
+/* Nút tải CV */
+.btn-dowload {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: var(--surface-color);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 14px;
+  border: 2px solid var(--primary-color);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-dowload:hover {
+  background-color: var(--primary-hover);
+  color: var(--surface-color);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(31, 111, 106, 0.2);
+}
+
+.btn-dowload i {
+  font-size: 16px;
+}
