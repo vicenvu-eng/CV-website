@@ -1,12 +1,12 @@
 :root {
-  --primary-color: #1f6f6a;
-  --primary-hover: #15504c;
-  --bg-color: #eef3f7;
-  --surface-color: #ffffff;
-  --surface-soft: #f8fbfd;
-  --border-color: #dce7ee;
-  --text-color: #2f3e46;
-  --muted-text-color: #333333;
+  --primary-color: #6f4e37; /*màu nhấn chính*/
+  --primary-hover: #5a3e2b; /*màu hover*/
+  --bg-color: #fbf7f2; /*nền ngoài trang*/
+  --surface-color: #fffdf9; /*nền card chính*/
+  --surface-soft: #fffaf4; /*nền card/phần phụ*/
+  --border-color: #e7ddd2;/*viền*/
+  --text-color: #3e2c23; /*chữ chính*/
+  --muted-text-color: #8a7b70; /* chữ phụ*/
 }
 
 body {
@@ -20,12 +20,42 @@ body {
   justify-content: center;
 }
 
+a {
+  color: var(--primary-color);
+}
+
+p,
+li {
+  color: var(--muted-text-color);
+}
+
+strong {
+  color: var(--text-color);
+}
+
+h1 {
+  color: var(--text-color);
+}
+
+h3 {
+  margin: 10px 0;
+  padding-left: 10px;
+  font-size: 1.17em;
+  color: var(--primary-color);
+}
+
+h4 {
+  margin: 0 0 8px;
+  font-size: 1.1em;
+  color: var(--primary-color);
+}
+
 #about {
   width: min(1000px, 100%);
   background-color: var(--surface-color);
   padding: 30px;
   border-radius: 15px;
-  box-shadow: 0 10px 24px rgba(23, 43, 77, 0.14);
+  box-shadow: 0 12px 28px rgba(62, 44, 35, 0.08);
 }
 
 .hero {
@@ -43,7 +73,7 @@ body {
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid var(--primary-color);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 14px rgba(62, 44, 35, 0.1);
 }
 
 .contact-card {
@@ -51,7 +81,6 @@ body {
   padding: 20px 18px;
   border: 1px solid var(--border-color);
   border-radius: 15px;
-  color: var(--primary-color);
 }
 
 .contact-card p {
@@ -59,6 +88,7 @@ body {
   display: flex;
   align-items: center;
   font-size: 14px;
+  color: var(--muted-text-color);
 }
 
 .contact-card p i {
@@ -66,11 +96,13 @@ body {
   margin: 0 10px 0 15px;
   text-align: center;
   font-size: 16px;
+  color: var(--primary-color);
 }
 
 .contact-card p a {
   text-decoration: none;
   margin-left: 2px;
+  color: var(--text-color);
 }
 
 .social-links {
@@ -78,14 +110,6 @@ body {
   flex-wrap: wrap;
   gap: 5px;
   margin: 5px 0 0 15px;
-}
-
-.social-item:hover .fa-facebook-f {
-  color: #1877f2;
-}
-
-.social-item:hover .fa-github {
-  color: var(--text-color);
 }
 
 .social-item {
@@ -112,53 +136,13 @@ body {
   transform: translateY(-2px);
 }
 
+.social-item i {
+  color: inherit;
+}
+
 .job-title {
   color: var(--primary-color);
   font-weight: 600;
-}
-
-/* Trang trí Kinh nghiệm làm việc */
-.exp-item {
-  margin-top: 10px;
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 10px;
-}
-
-.exp-item:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-h4 {
-  color: var(--text-color);
-  margin: 0 0 8px;
-  font-size: 1.1em;
-}
-
-.exp-item h4 span {
-  font-weight: 600;
-  color: var(--surface-color);
-  background-color: var(--primary-color);
-  padding: 5px 10px;
-  border-radius: 20px;
-  font-size: 0.9em;
-}
-
-.exp-item ul {
-  margin: 0;
-  padding-left: 20px;
-  color: var(--muted-text-color);
-}
-
-.exp-item li {
-  margin-bottom: 6px;
-}
-
-h3 {
-  padding-left: 10px;
-  margin: 10px 0;
-  font-size: 1.17em;
-  color: var(--primary-color);
 }
 
 .cv-layout {
@@ -167,12 +151,50 @@ h3 {
   gap: 20px;
 }
 
-:is(.skills, .summary, .education, .project, .experience) {
-  background: var(--surface-soft);
-  padding: 20px;
-  border-radius: 10px;
-  border: 1px solid var(--border-color);
+.cv-layout i {
+  color: var(--primary-color);
+}
+
+:is(.skills, .summary, .education, .project, .experience, .like) {
   margin-bottom: 10px;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  background: var(--surface-soft);
+}
+
+.skills,
+.like {
+  margin-top: 10px;
+}
+
+.exp-item {
+  margin-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.exp-item:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.exp-item h4 span {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.9em;
+  font-weight: 600;
+  color: var(--surface-color);
+  background-color: var(--primary-color);
+}
+
+.exp-item ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.exp-item li {
+  margin-bottom: 6px;
 }
 
 .project ul {
@@ -197,22 +219,18 @@ h3 {
 
 .project li:hover {
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 18px rgba(62, 44, 35, 0.1);
 }
 
 .project a {
   text-decoration: none;
-  color: var(--muted-text-color);
+  color: var(--text-color);
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
 .project li:hover a {
   color: var(--primary-color);
-}
-
-.skills {
-  margin-top: 10px;
 }
 
 .skill-list {
@@ -245,15 +263,6 @@ h3 {
   transform: scale(1.05);
 }
 
-.like {
-  margin-top: 10px;
-  background-color: var(--surface-soft);
-  color: var(--primary-color);
-  padding: 15px;
-  border-radius: 10px;
-  border: 1px solid var(--border-color);
-}
-
 .like-list {
   list-style: none;
   padding: 0;
@@ -275,18 +284,18 @@ h3 {
   border: 1px solid var(--border-color);
 }
 
-.like-list li i {
-  color: var(--primary-color);
-  width: 18px;
-  text-align: center;
-}
-
 .education p {
   margin: 0 0 10px;
 }
 
 .education p:last-child {
   margin-bottom: 0;
+}
+
+.like-list li i,
+.btn-dowload i {
+  width: 18px;
+  text-align: center;
 }
 
 @media (max-width: 860px) {
@@ -323,14 +332,14 @@ h3 {
   font-weight: 600;
   font-size: 14px;
   border: 2px solid var(--primary-color);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 14px rgba(62, 44, 35, 0.1);
 }
 
 .btn-dowload:hover {
   background-color: var(--primary-hover);
   color: var(--surface-color);
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(31, 111, 106, 0.2);
+  box-shadow: 0 8px 16px rgba(90, 62, 43, 0.16);
 }
 
 .btn-dowload i {
