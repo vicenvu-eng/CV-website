@@ -1,6 +1,6 @@
 # Personal Portfolio and CV Website
 
-> Website Hồ sơ năng lực cá nhân của Trần Vũ - FULL STAK DEVELOPER.
+> Website Hồ sơ năng lực cá nhân của Trần Vũ - FULL STACK DEVELOPER.
 > 🔗 **[Xem Website Trực Tiếp (Live Demo)](https://vicenvu-eng.github.io/CV-website/)**
 
 ---o0o---
@@ -22,7 +22,7 @@
 - **Triển khai (Deployment):** Trực tiếp thông qua GitHub Pages.
 - **Thiết kế UI:** Flexbox & CSS Grid, biến CSS (CSS Variables) để quản lý màu sắc chuẩn xác.
 
-# 📂 Hướng dẫn chạy dự án (Local Setup)
+## 📂 Hướng dẫn chạy dự án (Local Setup)
 
 Nếu bạn muốn tải mã nguồn này về máy để xem thử, hãy chạy các lệnh sau trong Terminal:
 
