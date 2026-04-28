@@ -32,23 +32,27 @@
               ><strong>Sinh ngày:</strong> 28/02/1994
             </p>
             <p>
-              <i class="fa-solid fa-phone"></i><strong>Số điện thoại:</strong>
-              <a href="tel:+84984980115"> +84 984 980 115</a>
+              <i class="fa-solid fa-phone"></i><strong>Số điện thoại:</strong
+              ><a href="tel:+84984980115"> +84 984 980 115</a>
             </p>
             <p>
-              <i class="fa-solid fa-location-dot"></i><strong>Địa chỉ:</strong>
-              385/13/9 Nguyễn Trọng Tuyển, phường Tân Sơn Hòa, TP. HCM
+              <i class="fa-solid fa-location-dot"></i
+              ><strong>Địa chỉ:</strong> 385/13/9 Nguyễn Trọng Tuyển, phường Tân
+              Sơn Hòa, TP. HCM
             </p>
             <p>
-              <i class="fa-solid fa-envelope"></i><strong>Email:</strong>
-              <a href="mailto:vicenvu@gmail.com"> vicenvu@gmail.com </a>
+              <i class="fa-solid fa-envelope"></i><strong>Email:</strong
+              ><a href="mailto:vicenvu@gmail.com"> vicenvu@gmail.com </a>
             </p>
 
             <div class="social-links">
               <a href="#" class="social-item"
                 ><i class="fab fa-facebook-f"></i> Facebook</a
               >
-              <a href="#" class="social-item"
+              <a
+                href="https://github.com/vicenvu-eng/CV-website"
+                target="_blank"
+                class="social-item"
                 ><i class="fab fa-github"></i> GitHub</a
               >
             </div>
@@ -188,14 +192,112 @@
 
           <section class="project">
             <h3><i class="fa-solid fa-laptop-code"></i> Dự án tiêu biểu</h3>
-            <ul>
-              <li><a href="#" target="_blank">Website CV của tôi</a></li>
-              <li><a href="#" target="_blank">Website bán hàng online</a></li>
-              <li><a href="#" target="_blank">Dự án 3</a></li>
+
+            <div id="modal-cv" class="modal">
+              <div class="modal-content">
+                <span class="close-btn">&times;</span>
+
+                <h4>Website CV của tôi</h4>
+                <div class="modal-body">
+                  <p>
+                    <strong>Công nghệ sử dụng: </strong>HTML, CSS, JavaScript,
+                    GitHub Pages
+                  </p>
+                  <p>
+                    <strong>Mô tả dự án: </strong>Thiết kế và phát triển trang
+                    web hồ sơ năng lực cá nhân để giới thiệu lộ trình phát triển
+                    kỹ năng và các dự án thực tế.
+                  </p>
+                  <h4>Tính năng nổi bật:</h4>
+                  <ul>
+                    <li>
+                      <strong>Responsive Design: </strong>Giao diện linh hoạt,
+                      hiển thị mượt mà trên cả giao diện điện thoại và máy tính.
+                    </li>
+                    <li>
+                      <strong>Tối ưu in ấn (Print-friendly): </strong>Bố cục
+                      HTML/CSS được xây dựng gọn gàng, cho phép xuất file PDF
+                      chuẩn xác từ trình duyệt (scale) để nộp trực tiếp cho
+                      phòng Nhân sự.
+                    </li>
+                    <li>
+                      <strong>Trải nghiệm UI/UX: </strong>Tích hợp Popup Modal
+                      bằng JavaScript thuần (Vanilla JS) giúp người xem đọc chi
+                      tiết dự án mượt mà không cần chuyển trang.
+                    </li>
+                  </ul>
+                  <a
+                    href="https://github.com/vicenvu-eng/CV-website"
+                    target="_blank"
+                    class="btn-download"
+                    style="margin-top: 15px; display: inline-block"
+                    >Xem Mã Nguồn (GitHub)</a
+                  >
+                </div>
+              </div>
+            </div>
+
+            <ul class="project-list">
+              <li>
+                <h4>Website CV của tôi</h4>
+                <button class="btn-open-modal" data-target="modal-cv">
+                  Xem chi tiết
+                </button>
+              </li>
+              <li>
+                <h4>Website bán hàng</h4>
+                <button class="btn-open-modal" data-target="modal-sale">
+                  Xem chi tiết
+                </button>
+              </li>
+              <li>
+                <h4>Dự án 3</h4>
+                <button class="btn-open-modal" data-target="modal-project3">
+                  Xem chi tiết
+                </button>
+              </li>
+              <li>
+                <h4>Dự án 4</h4>
+                <button class="btn-open-modal" data-target="modal-project4">
+                  Xem chi tiết
+                </button>
+              </li>
             </ul>
           </section>
         </main>
       </div>
     </section>
+
+    <script>
+      const openBtns = document.querySelectorAll(".btn-open-modal");
+      const closeBtns = document.querySelectorAll(".close-btn");
+
+      openBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const targetID = btn.getAttribute("data-target");
+          const modal = document.getElementById(targetID);
+          if (modal) {
+            modal.classList.add("show");
+          } else {
+            console.log(
+              "Chưa tạo phần nội dung (modal) cho dự án: " + targetID,
+            );
+          }
+        });
+      });
+
+      closeBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const modal = btn.closest(".modal");
+          if (modal) modal.classList.remove("show");
+        });
+      });
+
+      window.addEventListener("click", (event) => {
+        if (event.target.classList.contains("modal")) {
+          event.target.classList.remove("show");
+        }
+      });
+    </script>
   </body>
 </html>

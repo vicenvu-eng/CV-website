@@ -4,7 +4,7 @@
   --bg-color: #fbf7f2; /*nền ngoài trang*/
   --surface-color: #fffdf9; /*nền card chính*/
   --surface-soft: #fffaf4; /*nền card/phần phụ*/
-  --border-color: #e7ddd2;/*viền*/
+  --border-color: #e7ddd2; /*viền*/
   --text-color: #3e2c23; /*chữ chính*/
   --muted-text-color: #8a7b70; /* chữ phụ*/
 }
@@ -19,12 +19,62 @@ body {
   display: flex;
   justify-content: center;
 }
+/* --- LỚP NỀN ĐEN MỜ BAO PHỦ MÀN HÌNH (Modal--- */
+.modal {
+  display: none; /* Ẩn modal mặc định */
+  position: fixed; /* Định vị cố định */
+  z-index: 1000; /* Đảm bảo modal nằm trên cùng */
+  left: 0;
+  top: 0;
+  width: 100%; /* Chiếm toàn bộ chiều rộng */
+  height: 100%; /* Chiếm toàn bộ chiều cao */
+  background-color: rgba(0, 0, 0, 0.5); /* Màu nền đen mờ */
+  opacity: 0; /* Bắt đầu với độ mờ 0 */
+  transition: opacity 0.3s ease; /* Hiệu ứng chuyển đổi mờ*/
+}
+/* --- KHUNG TRẮNG CHỨA NỘI DUNG BÊN TRONG --- */
+.modal-content {
+  background-color: var(--surface-soft);
+  margin: 10vh auto; /* Cách lề trên 10%, tự canh giữa 2 bên */
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 650px;
+  position: relative;
+  transform: translateY(-50px); /* Kéo ngược lên trên 50px */
+  transition: transform 0.3s ease; /* Hiệu ứng trượt xuống mượt mà */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Đổ bóng cho đẹp */
+}
+
+/* --- NÚT ĐÓNG (DẤU X) Ở GÓC PHẢI --- */
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--muted-text-color);
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: #e74c3c; /* Đổi sang màu đỏ khi lia chuột vào */
+}
+
+/* --- LỚP ÁO CHOÀNG JS SẼ KÍCH HOẠT KHI BẤM NÚT --- */
+.modal.show {
+  display: block; /* Hiện hình */
+  opacity: 1; /* Rõ nét 100% */
+}
+
+.modal.show .modal-content {
+  transform: translateY(0); /* Trượt từ -50px về lại vị trí chuẩn */
+}
 
 a {
   color: var(--primary-color);
 }
 
-p,
 li {
   color: var(--muted-text-color);
 }
@@ -35,6 +85,23 @@ strong {
 
 h1 {
   color: var(--text-color);
+}
+
+ul li .btn-open-modal {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 4px 8px;
+  background-color: var(--border-color);
+  color: var(--text-color);
+  border-radius: 5px;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+ul li .btn-open-modal:hover {
+  background-color: var(--primary-hover);
+  color: var(--surface-color);
 }
 
 h3 {
