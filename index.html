@@ -9,6 +9,8 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
+    <!-- Chèn file JS chuẩn xác, sạch sẽ nhất -->
+    <script src="script.js" defer></script>
   </head>
   <body>
     <section id="about">
@@ -189,10 +191,25 @@
             <p>Thiết kế web: <strong>GREEN ACADEMY</strong></p>
             <p>Full Stack Developer: <strong>REKKEI EDUCATION</strong></p>
           </section>
-
+          <!-- Xây nút bấm -->
           <section class="project">
             <h3><i class="fa-solid fa-laptop-code"></i> Dự án tiêu biểu</h3>
+            <ul class="project-list">
+              <li class="btn-open-modal" data-target="modal-cv">
+                <h4>Website CV của tôi</h4>
+              </li>
+              <li class="btn-open-modal" data-target="modal-sale">
+                <h4>Website bán hàng</h4>
+              </li>
+              <li class="btn-open-modal" data-target="modal-project3">
+                <h4>Dự án 3</h4>
+              </li>
+              <li class="btn-open-modal" data-target="modal-project4">
+                <h4>Dự án 4</h4>
+              </li>
+            </ul>
 
+            <!-- CĂN PHÒNG 1: WEB CV -->
             <div id="modal-cv" class="modal">
               <div class="modal-content">
                 <span class="close-btn">&times;</span>
@@ -236,68 +253,19 @@
                 </div>
               </div>
             </div>
-
-            <ul class="project-list">
-              <li>
-                <h4>Website CV của tôi</h4>
-                <button class="btn-open-modal" data-target="modal-cv">
-                  Xem chi tiết
-                </button>
-              </li>
-              <li>
-                <h4>Website bán hàng</h4>
-                <button class="btn-open-modal" data-target="modal-sale">
-                  Xem chi tiết
-                </button>
-              </li>
-              <li>
-                <h4>Dự án 3</h4>
-                <button class="btn-open-modal" data-target="modal-project3">
-                  Xem chi tiết
-                </button>
-              </li>
-              <li>
-                <h4>Dự án 4</h4>
-                <button class="btn-open-modal" data-target="modal-project4">
-                  Xem chi tiết
-                </button>
-              </li>
-            </ul>
+            <!-- CĂN PHÒNG 2: WEB bán hàng -->
+            <div id="modal-sale" class="modal">
+              <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h4>Website bans hangf</h4>
+                <div class="modal-body">
+                  <p>Đang trong quá trình phát triển khi học tại REKKEI</p>
+                </div>
+              </div>
+            </div>
           </section>
         </main>
       </div>
     </section>
-
-    <script>
-      const openBtns = document.querySelectorAll(".btn-open-modal");
-      const closeBtns = document.querySelectorAll(".close-btn");
-
-      openBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const targetID = btn.getAttribute("data-target");
-          const modal = document.getElementById(targetID);
-          if (modal) {
-            modal.classList.add("show");
-          } else {
-            console.log(
-              "Chưa tạo phần nội dung (modal) cho dự án: " + targetID,
-            );
-          }
-        });
-      });
-
-      closeBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const modal = btn.closest(".modal");
-          if (modal) modal.classList.remove("show");
-        });
-      });
-
-      window.addEventListener("click", (event) => {
-        if (event.target.classList.contains("modal")) {
-          event.target.classList.remove("show");
-        }
-      });
-    </script>
   </body>
 </html>
