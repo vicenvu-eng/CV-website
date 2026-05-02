@@ -397,7 +397,7 @@ h4 {
 }
 
 /* Nút tải CV */
-.btn-dowload {
+.btn-download {
   display: inline-flex;
   align-items: center;
   gap: 10px;
