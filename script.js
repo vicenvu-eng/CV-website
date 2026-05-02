@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 1. CHUẨN BỊ DOM (Gom hết các phần tử lên đầu)
   const openBtns = document.querySelectorAll(".btn-open-modal");
   const closeBtns = document.querySelectorAll(".close-btn"); // Đã sửa đúng tên class
+  const downloadCvBtn = document.querySelector(".btn-dowload");
 
   // 2. ĐỊNH NGHĨA CÁC HÀM XỬ LÝ LÕI (Tách biệt logic)
 
@@ -66,4 +67,39 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
+
+  // Ép tải CV thay vì mở tab PDF
+  if (downloadCvBtn) {
+    downloadCvBtn.addEventListener("click", async (event) => {
+      event.preventDefault();
+
+      const fileUrl = downloadCvBtn.getAttribute("href");
+      const fileName = downloadCvBtn.getAttribute("download") || "CV-Tran-Vu.pdf";
+
+      try {
+        const response = await fetch(fileUrl);
+        if (!response.ok) {
+          throw new Error("Cannot download CV file.");
+        }
+
+        const blob = await response.blob();
+        const blobUrl = URL.createObjectURL(blob);
+        const tempLink = document.createElement("a");
+        tempLink.href = blobUrl;
+        tempLink.download = fileName;
+        document.body.appendChild(tempLink);
+        tempLink.click();
+        tempLink.remove();
+        URL.revokeObjectURL(blobUrl);
+      } catch (error) {
+        // Fallback: nếu fetch bị chặn, dùng cách tải mặc định của trình duyệt
+        const tempLink = document.createElement("a");
+        tempLink.href = fileUrl;
+        tempLink.download = fileName;
+        document.body.appendChild(tempLink);
+        tempLink.click();
+        tempLink.remove();
+      }
+    });
+  }
 });

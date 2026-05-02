@@ -203,6 +203,18 @@ h4 {
   transform: translateY(-2px);
 }
 
+.social-item.social-facebook:hover {
+  border-color: #1877f2;
+  color: #1877f2;
+  background-color: #e7f3ff;
+}
+
+.social-item.social-github:hover {
+  border-color: #24292f;
+  color: #24292f;
+  background-color: #f6f8fa;
+}
+
 .social-item i {
   color: inherit;
 }
