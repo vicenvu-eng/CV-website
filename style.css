@@ -9,6 +9,21 @@
   --muted-text-color: #8a7b70; /* chữ phụ*/
 }
 
+h1 {
+  color: var(--text-color);
+}
+h3 {
+  margin: 10px 0;
+  padding-left: 10px;
+  font-size: 1.17em;
+  color: var(--primary-color);
+}
+h4 {
+  margin: 0 0 8px;
+  font-size: 1.1em;
+  color: var(--primary-color);
+}
+
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--bg-color);
@@ -19,6 +34,88 @@ body {
   display: flex;
   justify-content: center;
 }
+
+/* 1. Định dạng khung ngoài Navbar */
+.navbar {
+  display: flex;
+  justify-content: center; /* Đổi từ space-between thành center */
+  align-items: center;
+  background-color: var(--surface-color);
+  padding: 15px 30px;
+  border-bottom: 1px solid var(--border-color);
+
+  position: fixed;
+  top: 0;
+  width: min(1000px, 100%); /* Rộng bằng đúng trang CV */
+  left: 50%; /* Đẩy mép trái ra giữa màn hình */
+  transform: translateX(-50%); /* Kéo lùi lại một nửa để tâm điểm khớp nhau */
+  z-index: 1000;
+}
+
+/* 2. Ép Tên sang góc phải */
+.nav-brand {
+  position: absolute;
+  right: 30px; /* Cách mép phải 30px cho cân đối với padding của navbar */
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--primary-color);
+}
+
+/* 2. Dàn hàng ngang cho danh sách link */
+.nav-links {
+  display: flex;
+  list-style: none; /* Xóa dấu chấm tròn mặc định của HTML */
+  gap: 20px; /* Tạo khoảng cách giữa các chữ */
+  margin: 0;
+}
+
+/* 3. Làm đẹp cho các đường link (thẻ a) */
+.nav-links a {
+  text-decoration: none; /* Bỏ gạch chân */
+  color: var(--primary-color);
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: var(--text-color);
+}
+
+/*logo và tên phần nab*/
+.logo-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-circle {
+  width: 40px;
+  height: 40px;
+  background-color: var(--primary-color);
+  border-radius: 50%; /* Hình tròn 50% như bạn đã biết */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  font-size: 0.8rem;
+  transition: transform 0.5s ease;
+}
+
+.logo-box:hover .logo-circle {
+  transform: rotate(360deg); /* Xoay khi hover cho "ngầu" */
+}
+
+.brand-text {
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+
+.brand-text span {
+  color: var(--muted-text-color);
+  font-weight: 300;
+}
+
 /* --- LỚP NỀN ĐEN MỜ BAO PHỦ MÀN HÌNH (Modal--- */
 .modal {
   display: none; /* Ẩn modal mặc định */
@@ -71,19 +168,29 @@ body {
   transform: translateY(0); /* Trượt từ -50px về lại vị trí chuẩn */
 }
 
-a {
-  color: var(--primary-color);
+/* 1. Trạng thái bình thường của nút */
+.modal-body a {
+  text-decoration: none;
+  color: var(--surface-soft);
+  background-color: var(--border-color); /* Đã bỏ dấu ngoặc dư */
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 8px;
+  display: inline-block; /* Giúp nút không bị đè lên các chữ khác */
+  /* Khai báo chuyển động mượt mà cho tất cả các hiệu ứng */
+  transition: all 0.3s ease;
 }
 
+/* 2. Trạng thái khi rê chuột vào (Hover) */
+.modal-body a:hover {
+  color: var(--surface-color); /* Đổi màu chữ */
+  background-color: var(--primary-color);
+}
 li {
   color: var(--muted-text-color);
 }
 
 strong {
-  color: var(--text-color);
-}
-
-h1 {
   color: var(--text-color);
 }
 
@@ -102,19 +209,6 @@ ul li .btn-open-modal {
 ul li .btn-open-modal:hover {
   background-color: var(--primary-hover);
   color: var(--surface-color);
-}
-
-h3 {
-  margin: 10px 0;
-  padding-left: 10px;
-  font-size: 1.17em;
-  color: var(--primary-color);
-}
-
-h4 {
-  margin: 0 0 8px;
-  font-size: 1.1em;
-  color: var(--primary-color);
 }
 
 #about {
@@ -171,7 +265,6 @@ h4 {
   margin-left: 2px;
   color: var(--text-color);
 }
-
 .social-links {
   display: flex;
   flex-wrap: wrap;
@@ -188,35 +281,32 @@ h4 {
   border-radius: 8px;
   text-decoration: none;
   color: var(--text-color);
-  transition:
-    color 0.3s ease,
-    border-color 0.3s ease,
-    background-color 0.3s ease,
-    transform 0.3s ease;
+  /* Giữ nguyên hiệu ứng chuyển động mượt mà của bạn */
+  transition: all 0.3s ease;
   border: 1px solid var(--border-color);
 }
 
+/* Nút nổi lên và sáng nhẹ viền khi hover */
 .social-item:hover {
   border-color: var(--primary-color);
-  color: var(--primary-color);
   background-color: var(--surface-soft);
   transform: translateY(-2px);
 }
 
-.social-item.social-facebook:hover {
-  border-color: #1877f2;
+/* CHỈ đổi màu icon Facebook khi hover vào nút */
+.social-item.social-facebook:hover i {
   color: #1877f2;
-  background-color: #e7f3ff;
 }
 
-.social-item.social-github:hover {
-  border-color: #24292f;
+/* CHỈ đổi màu icon GitHub khi hover vào nút */
+.social-item.social-github:hover i {
   color: #24292f;
-  background-color: #f6f8fa;
 }
 
+/* Đảm bảo icon nhận màu theo chữ lúc bình thường, và đổi màu mượt khi hover */
 .social-item i {
   color: inherit;
+  transition: color 0.3s ease;
 }
 
 .job-title {
@@ -379,7 +469,7 @@ h4 {
 
 @media (max-width: 860px) {
   body {
-    padding: 20px;
+    padding: 80px 20px 20px 20px; /* Đẩy nội dung từ phía trên xuống 80px */
   }
 
   #about {
@@ -414,13 +504,13 @@ h4 {
   box-shadow: 0 6px 14px rgba(62, 44, 35, 0.1);
 }
 
-.btn-dowload:hover {
+.btn-download:hover {
   background-color: var(--primary-hover);
   color: var(--surface-color);
   transform: translateY(-2px);
   box-shadow: 0 8px 16px rgba(90, 62, 43, 0.16);
 }
 
-.btn-dowload i {
+.btn-download i {
   font-size: 16px;
 }

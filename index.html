@@ -13,6 +13,25 @@
     <script src="script.js" defer></script>
   </head>
   <body>
+    <nav class="navbar">
+      <div class="nav-brand">
+        <div class="logo-box">
+          <div class="logo-circle">
+            <span>&lt;/&gt;</span>
+          </div>
+          <span class="brand-text">VŨ <span>TRAN</span></span>
+        </div>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#about">Giới thiệu</a></li>
+        <li><a href="#education">Học vấn</a></li>
+        <li><a href="#skills">Kỹ năng</a></li>
+        <li><a href="#experience">Kinh nghiệm</a></li>
+        <li><a href="#summary">Mục tiêu</a></li>
+        <li><a href="#project">Dự án</a></li>
+        <li><a href="#like">Sở thích</a></li>
+      </ul>
+    </nav>
     <section id="about">
       <header class="hero">
         <img src="avartar.png" alt="Avatar" class="avatar" />
@@ -68,7 +87,7 @@
             </div>
           </div>
 
-          <div class="skills">
+          <div class="skills" id="skills">
             <h3><i class="fa-solid fa-microchip"></i> Kỹ năng chuyên môn</h3>
             <ul class="skill-list">
               <li class="skill-item">HTML5</li>
@@ -80,7 +99,7 @@
             </ul>
           </div>
 
-          <div class="like">
+          <div class="like" id="like">
             <h3><i class="fa-solid fa-heart"></i> Sở thích</h3>
             <ul class="like-list">
               <li><i class="fa-solid fa-book-open"></i> Đọc sách</li>
@@ -91,7 +110,7 @@
         </aside>
 
         <main class="right-column">
-          <section class="summary">
+          <section class="summary" id="summary">
             <h3><i class="fa-solid fa-brain"></i> Mục tiêu nghề nghiệp</h3>
             <p>
               Đang theo đuổi lộ trình <strong>Full Stack Developer</strong> tại
@@ -102,7 +121,13 @@
               chiến trong các dự án Web hiện đại bằng ReactJS và Node.js.
             </p>
           </section>
-          <section class="experience">
+          <section class="education" id="education">
+            <h3><i class="fa-solid fa-graduation-cap"></i> Học vấn</h3>
+            <p>Cao đẳng: <strong>Nguyen Tat Thanh University</strong></p>
+            <p>Thiết kế web: <strong>GREEN ACADEMY</strong></p>
+            <p>Full Stack Developer: <strong>REKKEI EDUCATION</strong></p>
+          </section>
+          <section class="experience" id="experience">
             <h3><i class="fa-solid fa-briefcase"></i> Kinh nghiệm làm việc</h3>
 
             <div class="exp-item">
@@ -193,14 +218,8 @@
               </ul>
             </div>
           </section>
-          <section class="education">
-            <h3><i class="fa-solid fa-graduation-cap"></i> Học vấn</h3>
-            <p>Cao đẳng: <strong>Nguyen Tat Thanh University</strong></p>
-            <p>Thiết kế web: <strong>GREEN ACADEMY</strong></p>
-            <p>Full Stack Developer: <strong>REKKEI EDUCATION</strong></p>
-          </section>
           <!-- Xây nút bấm -->
-          <section class="project">
+          <section class="project" id="project">
             <h3><i class="fa-solid fa-laptop-code"></i> Dự án tiêu biểu</h3>
             <ul class="project-list">
               <li class="btn-open-modal" data-target="modal-cv">
