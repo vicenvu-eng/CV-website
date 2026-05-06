@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // 1. CHUẨN BỊ DOM (Gom hết các phần tử lên đầu)
   const openBtns = document.querySelectorAll(".btn-open-modal");
   const closeBtns = document.querySelectorAll(".close-btn"); // Đã sửa đúng tên class
-  const downloadCvBtn = document.querySelector(".btn-dowload");
+  const downloadCvBtn = document.querySelector(".btn-download");
 
   // 2. ĐỊNH NGHĨA CÁC HÀM XỬ LÝ LÕI (Tách biệt logic)
 
@@ -74,7 +74,8 @@ document.addEventListener("DOMContentLoaded", () => {
       event.preventDefault();
 
       const fileUrl = downloadCvBtn.getAttribute("href");
-      const fileName = downloadCvBtn.getAttribute("download") || "CV-Tran-Vu.pdf";
+      const fileName =
+        downloadCvBtn.getAttribute("download") || "CV-Tran-Vu.pdf";
 
       try {
         const response = await fetch(fileUrl);
@@ -102,4 +103,14 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+});
+
+// Lấy 2 thành phần chính: Nút bấm và Danh sách link
+const hamburgerBtn = document.getElementById("hamburger-btn");
+const navLinks = document.querySelector(".nav-links");
+
+// Khi người dùng click vào nút Hamburger
+hamburgerBtn.addEventListener("click", () => {
+  // Tự động thêm hoặc xóa class "active" vào nav-links
+  navLinks.classList.toggle("active");
 });

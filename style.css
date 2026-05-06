@@ -38,18 +38,30 @@ body {
 /* 1. Định dạng khung ngoài Navbar */
 .navbar {
   display: flex;
-  justify-content: center; /* Đổi từ space-between thành center */
+  justify-content: center;
   align-items: center;
   background-color: var(--surface-color);
   padding: 15px 30px;
   border-bottom: 1px solid var(--border-color);
-
   position: fixed;
   top: 0;
-  width: min(1000px, 100%); /* Rộng bằng đúng trang CV */
-  left: 50%; /* Đẩy mép trái ra giữa màn hình */
-  transform: translateX(-50%); /* Kéo lùi lại một nửa để tâm điểm khớp nhau */
+  width: min(1000px, 100%);
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 1000;
+}
+
+/*1. Mặc định ẩn nút Hamburger trên máy tính*/
+.hamburger-menu {
+  display: none;
+  cursor: pointer;
+  font-size: 24px;
+  padding: 10px;
+  color: var(--primary-color);
+  /* Giữ nút ở bên trái mà không đẩy menu chính */
+  position: absolute;
+  left: 20px;
+  margin-left: 20px;
 }
 
 /* 2. Ép Tên sang góc phải */
@@ -118,17 +130,20 @@ body {
 
 /* --- LỚP NỀN ĐEN MỜ BAO PHỦ MÀN HÌNH (Modal--- */
 .modal {
-  display: none; /* Ẩn modal mặc định */
-  position: fixed; /* Định vị cố định */
-  z-index: 1000; /* Đảm bảo modal nằm trên cùng */
+  visibility: hidden; /* Dùng visibility thay vì display: none */
+  position: fixed;
+  z-index: 1000;
   left: 0;
   top: 0;
-  width: 100%; /* Chiếm toàn bộ chiều rộng */
-  height: 100%; /* Chiếm toàn bộ chiều cao */
-  background-color: rgba(0, 0, 0, 0.5); /* Màu nền đen mờ */
-  opacity: 0; /* Bắt đầu với độ mờ 0 */
-  transition: opacity 0.3s ease; /* Hiệu ứng chuyển đổi mờ*/
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
 }
+
 /* --- KHUNG TRẮNG CHỨA NỘI DUNG BÊN TRONG --- */
 .modal-content {
   background-color: var(--surface-soft);
@@ -160,8 +175,8 @@ body {
 
 /* --- LỚP ÁO CHOÀNG JS SẼ KÍCH HOẠT KHI BẤM NÚT --- */
 .modal.show {
-  display: block; /* Hiện hình */
-  opacity: 1; /* Rõ nét 100% */
+  visibility: visible;
+  opacity: 1;
 }
 
 .modal.show .modal-content {
@@ -513,4 +528,47 @@ ul li .btn-open-modal:hover {
 
 .btn-download i {
   font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  /* 1. Hiện nút Hamburger */
+  .hamburger-menu {
+    display: block;
+    position: absolute; /* Đẩy nó ra khỏi luồng căn giữa của navbar */
+    left: 20px;
+    z-index: 1001;
+  }
+
+  /* 2. Thiết lập lại danh sách link thành Menu dọc */
+  .nav-links {
+    display: none; /* Mặc định ẩn */
+    flex-direction: column;
+    position: fixed; /* Cố định toàn màn hình hoặc dưới navbar */
+    top: 70px; /* Khoảng cách dưới thanh Navbar */
+    left: 0;
+    width: 100%;
+    background-color: var(--surface-color);
+    padding: 20px 0; /* Xóa padding-left mặc định */
+    margin: 0; /* Xóa margin mặc định */
+    border-bottom: 2px solid var(--border-color);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  /* 3. Khi bấm vào nút (JS thêm class active) */
+  .nav-links.active {
+    display: flex; /* Hiện menu lên */
+  }
+
+  /* 4. Chỉnh lại các mục link cho đẹp */
+  .nav-links li {
+    width: 100%;
+    text-align: center; /* Căn giữa chữ để không bị mất lề */
+    margin: 15px 0;
+  }
+
+  .nav-links li a {
+    font-size: 1.2rem;
+    display: block; /* Tăng diện tích bấm cho ngón tay */
+    width: 100%;
+  }
 }
