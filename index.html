@@ -24,7 +24,7 @@
           <div class="logo-circle">
             <span>&lt;/&gt;</span>
           </div>
-          <span class="brand-text">VŨ <span>TRAN</span></span>
+          <span class="brand-text">VŨ <span>TRẦN</span></span>
         </div>
       </div>
       <ul class="nav-links">
@@ -231,7 +231,7 @@
                 <h4>Website CV của tôi</h4>
               </li>
               <li class="btn-open-modal" data-target="modal-sale">
-                <h4>Website bán hàng</h4>
+                <h4>Agile Task Manager</h4>
               </li>
               <!-- <li class="btn-open-modal" data-target="modal-project3">
                 <h4>Dự án 3</h4>
@@ -260,8 +260,10 @@
                   <h4>Tính năng nổi bật:</h4>
                   <ul>
                     <li>
-                      <strong>Responsive Design: </strong>Giao diện linh hoạt,
-                      hiển thị mượt mà trên cả giao diện điện thoại và máy tính.
+                      <strong>Responsive Design: </strong>Áp dụng Flexbox để
+                      quản lý bố cục và Media Queries để kiểm soát điểm gãy
+                      (breakpoints), giúp giao diện tự động thích ứng hoàn hảo
+                      với mọi kích thước màn hình (Mobile, Tablet, Desktop)
                     </li>
                     <li>
                       <strong>Tối ưu in ấn (Print-friendly): </strong>Bố cục
@@ -285,13 +287,73 @@
                 </div>
               </div>
             </div>
-            <!-- CĂN PHÒNG 2: WEB bán hàng -->
+            <!-- CĂN PHÒNG 2: Agile Task Manager-->
             <div id="modal-sale" class="modal">
               <div class="modal-content">
                 <span class="close-btn">&times;</span>
-                <h4>Website bán hàng</h4>
+                <h4>Agile Task Manager</h4>
                 <div class="modal-body">
-                  <p>Đang trong quá trình phát triển khi học tại REKKEI</p>
+                  <p>
+                    <strong>Công nghệ sử dụng: </strong>HTML5, CSS3 (Flexbox),
+                    Vanilla JavaScript, LocalStorage.
+                  </p>
+                  <p>
+                    <strong>Mô tả dự án: </strong>Xây dựng ứng dụng quản lý công
+                    việc trực quan theo phương pháp Agile/Kanban. Dự án tập
+                    trung vào việc tối ưu hóa hiệu suất xử lý DOM và quản lý
+                    trạng thái dữ liệu người dùng mà không cần framework.
+                  </p>
+                  <h4>Tính năng nổi bật:</h4>
+                  <ul>
+                    <li>
+                      <strong
+                        >Logic Kéo-Thả Thông Minh (Smart Drag & Drop):
+                      </strong>
+                      Tích hợp thuật toán tính toán tọa độ (Y-coordinate) để cho
+                      phép chèn thẻ công việc vào giữa danh sách một cách chính
+                      xác, thay vì chỉ thêm vào cuối cột.
+                    </li>
+                    <li>
+                      <strong
+                        >Quản lý dữ liệu bền bỉ (Data Persistence):
+                      </strong>
+                      Sử dụng LocalStorage phối hợp với cấu trúc dữ liệu JSON để
+                      lưu trữ toàn bộ trạng thái bảng (tên việc, người làm, vị
+                      trí cột), đảm bảo dữ liệu không bị mất khi tải lại trang
+                      (F5).
+                    </li>
+                    <li>
+                      <strong>Bảo mật & Chống XSS: </strong>
+                      Áp dụng phương pháp đúc thẻ DOM (createElement) và
+                      textContent để xử lý dữ liệu đầu vào, loại bỏ hoàn toàn
+                      nguy cơ tấn công tiêm mã độc (XSS Injection).
+                    </li>
+                    <li>
+                      <strong>Kiến trúc Code tối ưu (DRY): </strong>
+                      Refactor mã nguồn theo nguyên tắc "Don't Repeat Yourself",
+                      tách biệt các module "Xưởng đúc thẻ" và "Trung tâm huấn
+                      luyện sự kiện" để dễ dàng bảo trì và mở rộng.
+                    </li>
+                    <li>
+                      <strong>Real-time Search & Dark Mode: </strong>
+                      Tích hợp bộ lọc tìm kiếm tức thời và khả năng ghi nhớ sở
+                      thích giao diện người dùng.
+                    </li>
+                  </ul>
+                  <a
+                    href="https://github.com/vicenvu-eng/Agile-Task-Manager"
+                    target="_blank"
+                    class="btn-download"
+                    style="margin-top: 15px; display: inline-block"
+                    >Xem Mã Nguồn (GitHub)</a
+                  >
+                  <a
+                    href="https://vicenvu-eng.github.io/Agile-Task-Manager/"
+                    target="_blank"
+                    class="btn-download"
+                    style="margin-top: 15px; display: inline-block"
+                    >Xem website Demo</a
+                  >
                 </div>
               </div>
             </div>

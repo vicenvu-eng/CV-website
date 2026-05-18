@@ -156,6 +156,9 @@ body {
   transform: translateY(-50px); /* Kéo ngược lên trên 50px */
   transition: transform 0.3s ease; /* Hiệu ứng trượt xuống mượt mà */
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Đổ bóng cho đẹp */
+
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
 /* --- NÚT ĐÓNG (DẤU X) Ở GÓC PHẢI --- */
@@ -571,4 +574,19 @@ ul li .btn-open-modal:hover {
     display: block; /* Tăng diện tích bấm cho ngón tay */
     width: 100%;
   }
+}
+
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+.modal-content::-webkit-scrollbar-track {
+  background: var(--bg-color);
+  border-radius: 8px;
+}
+.modal-content::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 8px;
+}
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-color);
 }
