@@ -9,8 +9,81 @@
   --muted-text-color: #8a7b70; /* chữ phụ*/
 }
 
+/* ===== ANIMATIONS (Hoạt ảo) ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUpDelay1 {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Class được thêm bằng JavaScript khi phần tử vào viewport */
+.fade-in-visible {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.slide-up-visible {
+  animation: slideUp 0.6s ease-out forwards;
+}
+
+/* Delay cho các phần tử riêng lẻ */
+.slide-up-visible:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.slide-up-visible:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.slide-up-visible:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+.slide-up-visible:nth-child(5) {
+  animation-delay: 0.4s;
+}
+
+.slide-up-visible:nth-child(6) {
+  animation-delay: 0.5s;
+}
+
+/* Trạng thái mặc định - chuẩn bị cho animation */
+.fade-in,
+.slide-up {
+  opacity: 0;
+}
+
+.slide-up {
+  transform: translateY(30px);
+}
+
 h1 {
   color: var(--text-color);
+  animation: slideUp 0.8s ease-out forwards;
 }
 h3 {
   margin: 10px 0;
@@ -142,21 +215,20 @@ body {
   transition:
     opacity 0.3s ease,
     visibility 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* --- KHUNG TRẮNG CHỨA NỘI DUNG BÊN TRONG --- */
 .modal-content {
   background-color: var(--surface-soft);
-  margin: 10vh auto; /* Cách lề trên 10%, tự canh giữa 2 bên */
   padding: 30px;
   border-radius: 12px;
   width: 90%;
   max-width: 650px;
   position: relative;
-  transform: translateY(-50px); /* Kéo ngược lên trên 50px */
-  transition: transform 0.3s ease; /* Hiệu ứng trượt xuống mượt mà */
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Đổ bóng cho đẹp */
-
   max-height: 80vh;
   overflow-y: auto;
 }
@@ -183,7 +255,7 @@ body {
 }
 
 .modal.show .modal-content {
-  transform: translateY(0); /* Trượt từ -50px về lại vị trí chuẩn */
+  /* Không có animation - chỉ hiển thị bình thường */
 }
 
 /* 1. Trạng thái bình thường của nút */
@@ -235,6 +307,7 @@ ul li .btn-open-modal:hover {
   padding: 30px;
   border-radius: 15px;
   box-shadow: 0 12px 28px rgba(62, 44, 35, 0.08);
+  animation: slideUp 0.8s ease-out forwards;
 }
 
 .hero {
@@ -244,6 +317,7 @@ ul li .btn-open-modal:hover {
   margin-bottom: 20px;
   border-bottom: 1px solid var(--border-color);
   padding-bottom: 20px;
+  animation: slideUp 0.9s ease-out forwards 0.2s;
 }
 
 .avatar {
@@ -253,6 +327,7 @@ ul li .btn-open-modal:hover {
   object-fit: cover;
   border: 3px solid var(--primary-color);
   box-shadow: 0 6px 14px rgba(62, 44, 35, 0.1);
+  animation: slideUp 1s ease-out forwards 0.3s;
 }
 
 .contact-card {
@@ -260,6 +335,7 @@ ul li .btn-open-modal:hover {
   padding: 20px 18px;
   border: 1px solid var(--border-color);
   border-radius: 15px;
+  animation: slideUp 1s ease-out forwards 0.4s;
 }
 
 .contact-card p {
@@ -348,6 +424,17 @@ ul li .btn-open-modal:hover {
   border: 1px solid var(--border-color);
   border-radius: 10px;
   background: var(--surface-soft);
+}
+
+:is(
+  .skills,
+  .summary,
+  .education,
+  .project,
+  .experience,
+  .like
+).slide-up-visible {
+  animation: slideUp 0.6s ease-out forwards;
 }
 
 .skills,

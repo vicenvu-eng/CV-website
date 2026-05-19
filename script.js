@@ -1,6 +1,6 @@
 /**
  * Tên file: script.js
- * Mô tả: Xử lý logic tương tác cho trang CV (Sửa lỗi trùng lặp biến)
+ * Mô tả: Xử lý logic tương tác cho trang CV
  */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -45,8 +45,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Đóng modal khi bấm vào nền ngoài (không phải nội dung modal)
   window.addEventListener("click", (e) => {
-    if (e.target.classList.contains("modal")) closeModal(e.target);
+    // Chỉ đóng nếu click trực tiếp vào .modal (nền ngoài), không phải .modal-content
+    if (e.target.classList.contains("modal")) {
+      closeModal(e.target);
+    }
   });
 
   window.addEventListener("keydown", (e) => {
@@ -101,4 +105,27 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
+  // ===== 4. SCROLL ANIMATION (Animation khi cuộn tới) =====
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: "0px 0px -50px 0px",
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("slide-up-visible");
+      }
+    });
+  }, observerOptions);
+
+  // Áp dụng observer cho các phần tử cần animation (KHÔNG gồm .modal)
+  const animatedElements = document.querySelectorAll(
+    ".skills, .summary, .education, .experience, .project, .like, .contact-card, .project li, .exp-item",
+  );
+
+  animatedElements.forEach((element) => {
+    observer.observe(element);
+  });
 });
