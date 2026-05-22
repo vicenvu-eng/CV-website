@@ -7,9 +7,15 @@
   --border-color: #e7ddd2; /*viền*/
   --text-color: #3e2c23; /*chữ chính*/
   --muted-text-color: #8a7b70; /* chữ phụ*/
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-reveal: 0.75s;
 }
 
-/* ===== ANIMATIONS (Hoạt ảo) ===== */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ===== ANIMATIONS ===== */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -22,7 +28,7 @@
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(22px);
   }
   to {
     opacity: 1;
@@ -30,60 +36,73 @@
   }
 }
 
-@keyframes slideUpDelay1 {
+@keyframes featureCardIn {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(14px) scale(0.98);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
-/* Class được thêm bằng JavaScript khi phần tử vào viewport */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
 .fade-in-visible {
-  animation: fadeIn 0.8s ease-out forwards;
+  animation: fadeIn 0.85s var(--ease-smooth) forwards;
 }
 
 .slide-up-visible {
-  animation: slideUp 0.6s ease-out forwards;
+  animation: slideUp var(--duration-reveal) var(--ease-smooth) forwards;
 }
 
-/* Delay cho các phần tử riêng lẻ */
-.slide-up-visible:nth-child(2) {
-  animation-delay: 0.1s;
+/* Stagger: các mục cùng cấp trong một khối */
+.scroll-reveal.slide-up-visible:nth-child(1) {
+  animation-delay: 0s;
 }
-
-.slide-up-visible:nth-child(3) {
-  animation-delay: 0.2s;
+.scroll-reveal.slide-up-visible:nth-child(2) {
+  animation-delay: 0.08s;
 }
-
-.slide-up-visible:nth-child(4) {
-  animation-delay: 0.3s;
+.scroll-reveal.slide-up-visible:nth-child(3) {
+  animation-delay: 0.16s;
 }
-
-.slide-up-visible:nth-child(5) {
+.scroll-reveal.slide-up-visible:nth-child(4) {
+  animation-delay: 0.24s;
+}
+.scroll-reveal.slide-up-visible:nth-child(5) {
+  animation-delay: 0.32s;
+}
+.scroll-reveal.slide-up-visible:nth-child(6) {
   animation-delay: 0.4s;
 }
 
-.slide-up-visible:nth-child(6) {
-  animation-delay: 0.5s;
-}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 
-/* Trạng thái mặc định - chuẩn bị cho animation */
-.fade-in,
-.slide-up {
-  opacity: 0;
-}
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
+  }
 
-.slide-up {
-  transform: translateY(30px);
+  .scroll-reveal.slide-up-visible,
+  .hero,
+  .fade-in-visible {
+    animation: none;
+  }
+
+  .modal.show .modal-body ul.feature-list li {
+    animation: none;
+  }
 }
 
 h1 {
   color: var(--text-color);
-  animation: slideUp 0.8s ease-out forwards;
 }
 h3 {
   margin: 10px 0;
@@ -201,80 +220,264 @@ body {
   font-weight: 300;
 }
 
-/* --- LỚP NỀN ĐEN MỜ BAO PHỦ MÀN HÌNH (Modal--- */
+/* ===== MODAL ===== */
 .modal {
-  visibility: hidden; /* Dùng visibility thay vì display: none */
+  visibility: hidden;
   position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  opacity: 0;
-  transition:
-    opacity 0.3s ease,
-    visibility 0.3s ease;
+  z-index: 9999;
+  inset: 0;
+  padding: 32px 28px;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: rgba(62, 44, 35, 0.42);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.35s ease,
+    visibility 0.35s ease;
 }
 
-/* --- KHUNG TRẮNG CHỨA NỘI DUNG BÊN TRONG --- */
-.modal-content {
-  background-color: var(--surface-soft);
-  padding: 30px;
-  border-radius: 12px;
-  width: 90%;
-  max-width: 650px;
-  position: relative;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Đổ bóng cho đẹp */
-  max-height: 80vh;
-  overflow-y: auto;
-}
-
-/* --- NÚT ĐÓNG (DẤU X) Ở GÓC PHẢI --- */
-.close-btn {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  font-size: 28px;
-  font-weight: bold;
-  color: var(--muted-text-color);
-  cursor: pointer;
-}
-
-.close-btn:hover {
-  color: #e74c3c; /* Đổi sang màu đỏ khi lia chuột vào */
-}
-
-/* --- LỚP ÁO CHOÀNG JS SẼ KÍCH HOẠT KHI BẤM NÚT --- */
 .modal.show {
   visibility: visible;
   opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  position: relative;
+  width: min(100%, 720px);
+  max-height: min(86vh, 760px);
+  overflow-y: auto;
+  padding: 44px 44px 40px;
+  margin: auto;
+  background: linear-gradient(
+    165deg,
+    var(--surface-color) 0%,
+    var(--surface-soft) 55%,
+    #fff8ef 100%
+  );
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  border-top: 4px solid var(--primary-color);
+  box-shadow:
+    0 28px 56px rgba(62, 44, 35, 0.2),
+    0 10px 24px rgba(62, 44, 35, 0.1);
+  transform: translateY(24px) scale(0.97);
+  opacity: 0;
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.35s ease;
 }
 
 .modal.show .modal-content {
-  /* Không có animation - chỉ hiển thị bình thường */
+  transform: translateY(0) scale(1);
+  opacity: 1;
 }
 
-/* 1. Trạng thái bình thường của nút */
+.modal-content > h4 {
+  margin: 0 52px 8px 0;
+  padding-bottom: 16px;
+  font-size: 1.35rem;
+  color: var(--text-color);
+  border-bottom: 1px solid var(--border-color);
+  letter-spacing: 0.02em;
+}
+
+.close-btn {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  line-height: 1;
+  font-weight: 400;
+  color: var(--muted-text-color);
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  cursor: pointer;
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.close-btn:hover {
+  color: var(--surface-color);
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  transform: rotate(90deg);
+}
+
+.modal-body {
+  color: var(--muted-text-color);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.modal-body p {
+  margin: 0 0 14px;
+}
+
+.modal-body p strong {
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+.modal-body > h4 {
+  margin: 22px 0 14px;
+  font-size: 1rem;
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* Tính năng nổi bật — xếp ngang */
+.modal-body ul.feature-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 18px;
+  margin: 0 0 20px;
+  padding: 8px 4px 12px;
+  list-style: none;
+  align-items: stretch;
+}
+
+.modal-body ul.feature-list li {
+  position: relative;
+  margin: 0;
+  padding: 20px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: var(--muted-text-color);
+  font-size: 0.88rem;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  line-height: 1.5;
+  box-shadow: 0 4px 12px rgba(62, 44, 35, 0.06);
+  transition:
+    transform 0.3s var(--ease-smooth),
+    box-shadow 0.3s var(--ease-smooth),
+    border-color 0.3s ease;
+}
+
+.modal-body ul.feature-list li:hover {
+  transform: translateY(-3px);
+  border-color: rgba(111, 78, 55, 0.35);
+  box-shadow: 0 10px 20px rgba(62, 44, 35, 0.1);
+}
+
+.modal-body ul.feature-list li::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  top: 0;
+  height: 3px;
+  width: auto;
+  border-radius: 0 0 3px 3px;
+  background: linear-gradient(
+    90deg,
+    var(--primary-color),
+    var(--primary-hover)
+  );
+}
+
+.modal.show .modal-body ul.feature-list li {
+  animation: featureCardIn 0.55s var(--ease-smooth) backwards;
+}
+
+.modal.show .modal-body ul.feature-list li:nth-child(1) {
+  animation-delay: 0.06s;
+}
+.modal.show .modal-body ul.feature-list li:nth-child(2) {
+  animation-delay: 0.12s;
+}
+.modal.show .modal-body ul.feature-list li:nth-child(3) {
+  animation-delay: 0.18s;
+}
+.modal.show .modal-body ul.feature-list li:nth-child(4) {
+  animation-delay: 0.24s;
+}
+.modal.show .modal-body ul.feature-list li:nth-child(5) {
+  animation-delay: 0.3s;
+}
+.modal.show .modal-body ul.feature-list li:nth-child(6) {
+  animation-delay: 0.36s;
+}
+
+.modal-body ul.feature-list li strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.92rem;
+  color: var(--text-color);
+}
+
+/* Agile Task Manager — 5 tính năng, khoảng cách đều, hàng cuối căn giữa */
+#modal-sale .modal-content {
+  width: min(100%, 860px);
+}
+
+#modal-sale .modal-body ul.feature-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 20px;
+  margin: 0 0 24px;
+  padding: 12px 10px 16px;
+}
+
+#modal-sale .modal-body ul.feature-list li {
+  flex: 0 1 calc(33.333% - 14px);
+  min-width: 200px;
+  max-width: calc(33.333% - 14px);
+  margin: 0;
+  padding: 20px 18px 18px;
+  box-sizing: border-box;
+}
+
 .modal-body a {
   text-decoration: none;
-  color: var(--surface-soft);
-  background-color: var(--border-color); /* Đã bỏ dấu ngoặc dư */
-  font-weight: 500;
+  color: var(--surface-color);
+  background-color: var(--primary-color);
+  font-weight: 600;
+  font-size: 0.9rem;
   padding: 10px 20px;
+  margin-top: 15px;
+  margin-right: 10px;
   border-radius: 8px;
-  display: inline-block; /* Giúp nút không bị đè lên các chữ khác */
-  /* Khai báo chuyển động mượt mà cho tất cả các hiệu ứng */
-  transition: all 0.3s ease;
+  border: 2px solid var(--primary-color);
+  display: inline-block;
+  gap: 8px;
+  box-shadow: 0 6px 14px rgba(62, 44, 35, 0.12);
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
-/* 2. Trạng thái khi rê chuột vào (Hover) */
 .modal-body a:hover {
-  color: var(--surface-color); /* Đổi màu chữ */
+  color: var(--surface-color);
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(90, 62, 43, 0.18);
+}
+
+.modal-body a.btn-download {
   background-color: var(--primary-color);
+  color: var(--surface-color);
 }
 li {
   color: var(--muted-text-color);
@@ -307,7 +510,6 @@ ul li .btn-open-modal:hover {
   padding: 30px;
   border-radius: 15px;
   box-shadow: 0 12px 28px rgba(62, 44, 35, 0.08);
-  animation: slideUp 0.8s ease-out forwards;
 }
 
 .hero {
@@ -317,7 +519,7 @@ ul li .btn-open-modal:hover {
   margin-bottom: 20px;
   border-bottom: 1px solid var(--border-color);
   padding-bottom: 20px;
-  animation: slideUp 0.9s ease-out forwards 0.2s;
+  animation: slideUp 0.9s var(--ease-smooth) forwards;
 }
 
 .avatar {
@@ -327,7 +529,6 @@ ul li .btn-open-modal:hover {
   object-fit: cover;
   border: 3px solid var(--primary-color);
   box-shadow: 0 6px 14px rgba(62, 44, 35, 0.1);
-  animation: slideUp 1s ease-out forwards 0.3s;
 }
 
 .contact-card {
@@ -335,7 +536,6 @@ ul li .btn-open-modal:hover {
   padding: 20px 18px;
   border: 1px solid var(--border-color);
   border-radius: 15px;
-  animation: slideUp 1s ease-out forwards 0.4s;
 }
 
 .contact-card p {
@@ -424,17 +624,6 @@ ul li .btn-open-modal:hover {
   border: 1px solid var(--border-color);
   border-radius: 10px;
   background: var(--surface-soft);
-}
-
-:is(
-  .skills,
-  .summary,
-  .education,
-  .project,
-  .experience,
-  .like
-).slide-up-visible {
-  animation: slideUp 0.6s ease-out forwards;
 }
 
 .skills,
@@ -664,16 +853,97 @@ ul li .btn-open-modal:hover {
 }
 
 .modal-content::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
+
 .modal-content::-webkit-scrollbar-track {
-  background: var(--bg-color);
-  border-radius: 8px;
+  margin: 12px 0;
+  background: transparent;
 }
+
 .modal-content::-webkit-scrollbar-thumb {
   background: var(--border-color);
-  border-radius: 8px;
+  border-radius: 999px;
 }
+
 .modal-content::-webkit-scrollbar-thumb:hover {
   background: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+  .modal {
+    padding: 24px 20px;
+  }
+
+  .modal-content {
+    padding: 36px 32px 32px;
+  }
+
+  .modal-body ul.feature-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    padding: 2px 0 6px;
+  }
+
+  #modal-sale .modal-body ul.feature-list {
+    display: flex;
+    gap: 16px;
+    padding: 10px 6px 14px;
+  }
+
+  #modal-sale .modal-body ul.feature-list li {
+    flex: 0 1 calc(50% - 10px);
+    min-width: 160px;
+    max-width: calc(50% - 10px);
+  }
+}
+
+@media (max-width: 600px) {
+  .modal {
+    padding: 16px 14px;
+    align-items: flex-end;
+  }
+
+  .modal-content {
+    max-height: 92vh;
+    padding: 32px 24px 28px;
+    border-radius: 16px 16px 12px 12px;
+  }
+
+  .modal-content > h4 {
+    font-size: 1.15rem;
+    margin-right: 44px;
+    padding-bottom: 14px;
+  }
+
+  .close-btn {
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    font-size: 1.35rem;
+  }
+
+  .modal-body ul.feature-list {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding: 6px 2px 10px;
+  }
+
+  .modal-body ul.feature-list li {
+    padding: 18px 14px 14px;
+  }
+
+  #modal-sale .modal-body ul.feature-list {
+    flex-direction: column;
+    gap: 14px;
+    padding: 8px 4px 12px;
+  }
+
+  #modal-sale .modal-body ul.feature-list li {
+    flex: 1 1 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
 }

@@ -45,12 +45,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Đóng modal khi bấm vào nền ngoài (không phải nội dung modal)
-  window.addEventListener("click", (e) => {
-    // Chỉ đóng nếu click trực tiếp vào .modal (nền ngoài), không phải .modal-content
-    if (e.target.classList.contains("modal")) {
-      closeModal(e.target);
-    }
+  // Đóng modal khi bấm vào vùng nền tối bên ngoài khung trắng
+  document.querySelectorAll(".modal").forEach((modal) => {
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        closeModal(modal);
+      }
+    });
   });
 
   window.addEventListener("keydown", (e) => {
@@ -107,25 +108,37 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ===== 4. SCROLL ANIMATION (Animation khi cuộn tới) =====
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px",
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("slide-up-visible");
-      }
-    });
-  }, observerOptions);
-
-  // Áp dụng observer cho các phần tử cần animation (KHÔNG gồm .modal)
   const animatedElements = document.querySelectorAll(
     ".skills, .summary, .education, .experience, .project, .like, .contact-card, .project li, .exp-item",
   );
 
-  animatedElements.forEach((element) => {
-    observer.observe(element);
-  });
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+
+  if (prefersReducedMotion) {
+    animatedElements.forEach((el) => {
+      el.classList.add("scroll-reveal", "slide-up-visible");
+    });
+  } else {
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("slide-up-visible");
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12,
+        rootMargin: "0px 0px -40px 0px",
+      },
+    );
+
+    animatedElements.forEach((element) => {
+      element.classList.add("scroll-reveal");
+      observer.observe(element);
+    });
+  }
 });
